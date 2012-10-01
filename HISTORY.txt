@@ -1,0 +1,152 @@
+//******************************************************************************
+//==============================================================================
+// Date        Author        Version
+//      Changes
+//==============================================================================
+// 2002-10-28  coder_1024    v1.0
+//
+//      - initial creation
+//------------------------------------------------------------------------------
+// 2002-10-29  coder_1024    v1.1
+//
+//      - cleaned things up
+//      - added version number
+//      - added comments to help readability
+//      - only updates the tray icon if the state changes as opposed to every
+//        time the user interface updates
+//      - added text to clarify which indicator was for which server
+//------------------------------------------------------------------------------
+// 2002-10-29  Sancus        v1.2
+//
+//      - added sound support for both the the game server going up and down
+//------------------------------------------------------------------------------
+// 2002-10-31  coder_1024    v1.3
+//
+//      - re-arranged some of the sound code slightly and removed the menu
+//        options for sound due to the options dialog added (see below)
+//      - added a VERSION resource to the project
+//      - added code to prevent the application from being run multiple times
+//        on the same machine
+//      - added support for configurable parameters which get stored in the
+//        windows registry (HKEY_CURRENT_USER\Software\coder_1024\sbtray)
+//      - added an options dialog
+//      - moved a couple parameters over to the new options dialog box, allowing
+//        them to be user-configurable
+//      - added an About box
+//
+//------------------------------------------------------------------------------
+// 2002-11-01  coder_1024    v1.4
+//
+//      - added an "Update Now" menu item to force an immediate update of
+//        the server states from the WarCry page
+//      - added a menu item which indicates how old (secs) the current server
+//        state info is
+//      - added a menu item which indicates how long each of the servers have
+//        been in the state they're currently indicated as being in (as far
+//        as sbtray knows).  note that if you just started sbtray these will
+//        be very small.  it doesn't actually read these values from the WarCry
+//        page, it just reports how long IT has known of the current state.
+//      - toned down the user interface update frequency a little
+//
+//------------------------------------------------------------------------------
+// 2002-11-03  coder_1024    v1.5
+//
+//      - timer displays on the menu stop showing seconds once they've gone
+//        past 1 minute.
+//      - added weeks (w) display for formatted timers (I'm optimistic)
+//      - now plays notification sounds in a seperate thread.
+//      - playing sounds requires a little initialization time which happens on
+//        the first call to the sound API.  this is now done right at startup
+//        and an hourglass tray icon is used to indicate that sbtray is still
+//        initializing.  the hourglass goes away once initialization is complete
+//        and status has been received from the status page.
+//      - Added a Links menu, which is built from a text file in the sbtray
+//        directory (sbtray_links.txt).  This can be customized to contain
+//        whatever links are desired by editing the file and then restarting
+//        sbtray
+//      - Added optional logging.  If enabled, server status is logged to
+//        a file in the sbtray directory
+//
+//------------------------------------------------------------------------------
+// 2002-11-06  coder_1024    v1.6
+//
+//      - Added optional Email notification when server states change.
+//------------------------------------------------------------------------------
+// 2003-02-09  coder_1024    v1.7
+//
+//      - Drizztfun pointed out that the call to InternetOpenUrl() may cause
+//        sbtray to get a cached copy of the page.  The reload flag was added
+//        to ensure we're going to the server to get the latest.
+//------------------------------------------------------------------------------
+// 2003-03-08  coder_1024    v1.8
+//
+//      - changed to use Sancus' server
+//      - updated links file
+//------------------------------------------------------------------------------
+// 2003-03-12  coder_1024    v1.9
+//
+//      - added support for multiple game worlds
+//      - added an "unknown" state which displays gray status bars.  this is
+//        used if the status web page can't be downloaded, or is not in the
+//        expected format.  this is also used initially, when sbtray starts up,
+//        before the first update comes in.
+//      - added resource maps and pre-loading of resources (icons and bitmaps)
+//      - downloads the entire page now
+//      - cleaned up some potential handle leaks
+//      - tweaked text sbtray looks for wrt patch and login servers
+//      - fixed a bug causing the tray icon game server indicator not to change
+//        when you selected a different world which had a different state
+//------------------------------------------------------------------------------
+// 2003-03-20  coder_1024    v1.10
+//
+//      - updated links file
+//      - updated world list to match list of release worlds
+//      - significant rework of the way the unknown state is handled, providing
+//        much more sensible results
+//------------------------------------------------------------------------------
+// 2003-08-27  coder_1024    v1.11
+//
+//      - updated to pull status from the Ubisoft site.  Note that the Ubisoft
+//        site doesn't currently show the patch or login servers, so sbtray will
+//        just status them as unknown for now.
+//------------------------------------------------------------------------------
+// 2003-09-14  coder_1024    v1.12
+//
+//      - cleaned up the logging a little making it easy to turn on logging
+//        and then open the results in excel for analysis.
+//------------------------------------------------------------------------------
+// 2003-10-30  coder_1024    v1.13
+//
+//      - upgraded from Visual C++ v6 to Visual Studio .NET 2002 (Visual C++ v7)
+//        and you'll now need to have the new VC++ to build sbtray as a result.
+//      - updated world list, removing Scorn and Treachery and adding
+//        Vengeance and Corruption
+//      - added status for Test server
+//      - am now using the Nullsoft installer to release sbtray. added
+//        sbtray.nsi which is the Nullsoft installer script file.  also added
+//        installer_text.rtf.
+//------------------------------------------------------------------------------
+// 2003-12-07  coder_1024    v1.14
+//
+//	- switched back to VC6, having problems with VS.NET
+//      - updated world list
+//------------------------------------------------------------------------------
+// 2003-12-26  coder_1024    v1.15
+//
+//      - added status of patch and login servers
+//------------------------------------------------------------------------------
+// 2004-06-10  coder_1024    v1.16
+//
+//      - updated world list
+//      - updgraded to VC++ .NET 2003 (v7.1).  left the old project files to
+//        allow building with v6 if desired.
+//      - minor tweak to patch/login server checking code.
+//------------------------------------------------------------------------------
+// 2005-12-30  coder_1024    v1.17
+//
+//      - updated world list
+//      - changed code to match latest Chronicle of Strife status format
+//      - cleaned up menu server status icons
+//      - updated the links menu
+//==============================================================================
+//******************************************************************************

@@ -1,0 +1,12 @@
+################################################################################
+# sbtray_worldlist.txt
+#
+# - lists the names of the worlds for which sbtray provides status
+# - list one per line
+# - changes to this file do not take effect until you restart sbtray
+################################################################################
+Mourning
+Redemption
+Vindication
+Wrath
+Test

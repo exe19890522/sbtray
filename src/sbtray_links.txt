@@ -1,0 +1,49 @@
+################################################################################
+# sbtray_links.txt
+#
+# - this file is used to build the Links menu
+# - you can customize the Links menu by editing this file.  Changes won't
+#   take effect until you restart sbtray.
+# - each link requires two lines, one for the title which will be displayed in
+#   the menu and one for the item to be opened when the link is selected
+# - the item to be opened can be a URL or a file.  specifically, anything which
+#   can be opened by the ShellExecute() Windows API.
+# - <SEP> inserts a menu separator
+################################################################################
+Chronicle of Strife
+http://chronicle.ubi.com
+Official Forums
+http://ubbforums.ubi.com
+Tech Support
+http://sbsupport.ubi.com
+Patcher Messages
+http://relnotes.sb.ubi.com/index.shtml
+Patcher Messages (Test Server)
+http://relnotes.sb.ubi.com/index_test.shtml
+Account Manager
+https://secure.ubi.com/billing/my_account.htm?game=shadowbane
+<SEP>
+Ashen Temper's Site
+http://www.ashentemper.com
+Rivkah's Shadowbane Notes
+http://www.anybrowser.org/shadowbane
+Gamer's Grove
+http://www.gamersgrove.com/shadowbane
+Shadowbane Catacombs
+http://sb.catacombs.com
+<SEP>
+GameRifts
+http://www.gamerifts.com
+Guild vs. Guild
+http://www.guildvsguild.com
+MMORPG.com
+http://www.mmorpg.com
+<SEP>
+sbtray readme file
+readme.txt
+sbtray revision history
+history.txt
+sbtray Home Page
+http://sbtray.sourceforge.net
+customize this menu
+sbtray_links.txt
